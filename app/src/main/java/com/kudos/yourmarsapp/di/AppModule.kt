@@ -1,7 +1,7 @@
 package com.kudos.yourmarsapp.di
 
-import com.kudos.yourmarsapp.network.MarsApiService
-import com.kudos.yourmarsapp.repository.MarsRepository
+import com.kudos.yourmarsapp.network.ApiService
+import com.kudos.yourmarsapp.repository.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +14,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideMarsRepository(marsApiService: MarsApiService): MarsRepository {
-        return MarsRepository(marsApiService)
+    fun provideMainRepository(apiService: ApiService): MainRepository {
+        return MainRepository(apiService)
     }
 
 }

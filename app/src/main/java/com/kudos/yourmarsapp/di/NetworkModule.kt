@@ -1,6 +1,7 @@
 package com.kudos.yourmarsapp.di
 
-import com.kudos.yourmarsapp.network.MarsApiService
+import com.kudos.yourmarsapp.network.ApiService
+import com.kudos.yourmarsapp.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +15,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+
 
     @Singleton
     @Provides
@@ -34,15 +37,15 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://android-kotlin-fun-mars-server.appspot.com/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
     }
 
     @Provides
-    fun provideMarsApiService(retrofit: Retrofit): MarsApiService {
-        return retrofit.create(MarsApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kudos.yourmarsapp.network.models.AmphibiansApiResponseItem
 import com.kudos.yourmarsapp.network.models.MarsApiResponseItem
 import com.kudos.yourmarsapp.repository.MainRepository
 import com.kudos.yourmarsapp.utils.Status
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MarsViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
+class AmphibiansViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<Status>()
@@ -22,24 +23,24 @@ class MarsViewModel @Inject constructor(private val mainRepository: MainReposito
 
     // Internally, we use a MutableLiveData, because we will be updating the List of MarsPhoto
     // with new values
-    private val _photos = MutableLiveData<List<MarsApiResponseItem>>()
+    private val _amphibians = MutableLiveData<List<AmphibiansApiResponseItem>>()
 
     // The external LiveData interface to the property is immutable, so only this class can modify
-    val photos: LiveData<List<MarsApiResponseItem>> = _photos
+    val amphibians: LiveData<List<AmphibiansApiResponseItem>> = _amphibians
 
     init {
-        getMarsPhotos()
+        getAmphibians()
     }
 
-    private fun getMarsPhotos() {
+    private fun getAmphibians() {
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                _photos.value = mainRepository.getMarsPhotos()
+                _amphibians.value = mainRepository.getAmphibians()
                 _status.value = Status.SUCCESS
             } catch (e: Exception) {
                 _status.value = Status.ERROR
-                _photos.value = listOf()
+                _amphibians.value = listOf()
             }
         }
     }

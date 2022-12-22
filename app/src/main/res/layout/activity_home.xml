@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_10sdp"
+    tools:context=".views.activities.HomeActivity">
+
+    <Button
+        android:id="@+id/seeMarsPhotosButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="See Mars Photos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/checkOutAmphibiansButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkout Amphibians"
+        app:layout_constraintTop_toBottomOf="@id/seeMarsPhotosButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
